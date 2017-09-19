@@ -6,8 +6,12 @@
           <option name="url" value="https://github.com/baldrsky/MobileGuard" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/SwinJoy/MobileGuard.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$/AndroidStudioProjects" />
+    <option name="cloneParentDir" value="$USER_HOME$/AndroidStudioProjects1" />
   </component>
 </application>
