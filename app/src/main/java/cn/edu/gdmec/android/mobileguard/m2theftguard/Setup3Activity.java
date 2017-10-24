@@ -31,13 +31,13 @@ public class Setup3Activity extends BaseSetupActivity implements View.OnClickLis
 
     @Override
     public void showNext() {
-        String safephone = mInputPhone.getText().toString().trim();
-        if (TextUtils.isEmpty(safephone)){
+        String safePhone = mInputPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(safePhone)){
             Toast.makeText(this,"请输入安全号码",Toast.LENGTH_LONG).show();
             return;
         }
         SharedPreferences.Editor edit = sp.edit();
-        edit.putString("safephone",safephone);
+        edit.putString("safephone",safePhone);
         edit.commit();
         startActivityAndFinishSelf(Setup4Activity.class);
     }

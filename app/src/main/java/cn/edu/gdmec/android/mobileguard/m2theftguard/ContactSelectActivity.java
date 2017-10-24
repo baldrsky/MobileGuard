@@ -17,6 +17,8 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.adapter.ContactAdapter;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.entity.ContactInfo;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.ContactInfoParser;
 
+//import java.util.logging.Handler;
+
 /**
  * Created by ASUS PRO on 2017/10/20.
  */
@@ -35,7 +37,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
                     }
                     break;
             }
-        };
+        }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,7 +59,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
                 systemContacts = ContactInfoParser.getSystemContact(ContactSelectActivity.this);
                 systemContacts.addAll(ContactInfoParser.getSimContacts(ContactSelectActivity.this));
                 mHandler.sendEmptyMessage(10);
-            };
+            }
         }.start();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
