@@ -31,7 +31,7 @@ public class SmsLostFindReceiver extends BroadcastReceiver{
         boolean protecting = sharedPreferences.getBoolean("protecting",true);
         if (protecting){
             DevicePolicyManager dpm = (DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            Object[] objs = (Object[])intent.getExtras().get("puds");
+            Object[] objs = (Object[])intent.getExtras().get("pdus");
             for (Object obj : objs){
                 SmsMessage smsMessage = SmsMessage.createFromPdu((byte[])obj);
                 String sender = smsMessage.getOriginatingAddress();
@@ -40,7 +40,7 @@ public class SmsLostFindReceiver extends BroadcastReceiver{
                 }
                 String body = smsMessage.getMessageBody();
                 String safephone = sharedPreferences.getString("safephone",null);
-                if (!TextUtils.isEmpty(safephone)&sender.equals(safephone)){
+                if (!TextUtils.isEmpty(safephone) & sender.equals(safephone)){
                     if ("#*location*#".equals(body)){
                         Log.i(TAG,"返回位置信息");
                         Intent service = new Intent(context, GPSLocationService.class);

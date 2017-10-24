@@ -15,7 +15,7 @@ import cn.edu.gdmec.android.mobileguard.R;
 
 public class LostFindActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView mSafePhoneTV;
-    private RelativeLayout mInterSetupURL;
+    private RelativeLayout mInterSetupRL;
     private SharedPreferences msharedPreferences;
     private ToggleButton mToggleButton;
     private TextView mProtectStatusTV;
@@ -44,8 +44,8 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
         mSafePhoneTV = (TextView)findViewById(R.id.tv_safephone);
         mSafePhoneTV.setText(msharedPreferences.getString("safephone",""));
         mToggleButton = (ToggleButton)findViewById(R.id.togglebtn_lostfind);
-        mInterSetupURL = (RelativeLayout)findViewById(R.id.rl_inter_setup_wizard);
-        mInterSetupURL.setOnClickListener(this);
+        mInterSetupRL = (RelativeLayout)findViewById(R.id.rl_inter_setup_wizard);
+        mInterSetupRL.setOnClickListener(this);
         mProtectStatusTV = (TextView)findViewById(R.id.tv_lostfind_protectstauts);
         boolean protecting = msharedPreferences.getBoolean("protecting",true);
         if (protecting){

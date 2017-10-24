@@ -37,7 +37,7 @@ public class GPSLocationService extends Service{
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setCostAllowed(true);
         String name = lm.getBestProvider(criteria,true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED&&ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             return;
         }
         lm.requestLocationUpdates(name,0,0,listener);
@@ -50,7 +50,7 @@ public class GPSLocationService extends Service{
             sb.append("accuracy:"+location.getAccuracy()+"\n");
             sb.append("speed:"+location.getSpeed()+"\n");
             sb.append("Logitude:"+location.getLongitude()+"\n");
-            sb.append("Latitue:"+location.getLatitude()+"\n");
+            sb.append("Latitude:"+location.getLatitude()+"\n");
             String result = sb.toString();
             SharedPreferences sp = getSharedPreferences("config",MODE_PRIVATE);
             String safenumber = sp.getString("safephone","");
