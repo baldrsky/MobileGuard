@@ -26,7 +26,7 @@ public class APP extends Application{
             String binsim = sp.getString("sim","");
             TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
             String realsim = tm.getSimSerialNumber();
-            //realsim = "999";
+            realsim = "999";
             if (binsim.equals(realsim)){
                 Log.i("","SIM卡未发生变化，还是您的手机");
             }else{

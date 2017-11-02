@@ -20,10 +20,10 @@ public class BlackNumberOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table blacknumber"+
-                "(id integer primary key autoincrement,"+
+                "(id integer primary key autocrement,"+
                 "number varchar(20),"+
                 "name varchar(255),"+
-                "mode integer)");
+                "mode interger)");
     }
 
     @Override
