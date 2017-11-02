@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.ContactSelectActivity;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.adapter.BlackContactAdapter;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
@@ -104,6 +106,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_security_phone);
         initView();
         fillData();
@@ -116,7 +119,8 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                 finish();
                 break;
             case R.id.btn_addblacknumber:
-                startActivity(new Intent(this,AddBlackNumberActivity.class));
+                startActivityForResult(
+                        new Intent(this, AddBlackNumberActivity.class),0);
                 break;
         }
     }

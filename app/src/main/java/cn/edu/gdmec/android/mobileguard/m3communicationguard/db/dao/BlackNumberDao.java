@@ -98,7 +98,7 @@ public class BlackNumberDao {
 
     public int getTotalNumber(){
         SQLiteDatabase db = blackNumberOpenHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select count(*) from backnumber",null);
+        Cursor cursor = db.rawQuery("select count(*) from blacknumber",null);
         cursor.moveToNext();
         int count = cursor.getInt(0);
         cursor.close();
