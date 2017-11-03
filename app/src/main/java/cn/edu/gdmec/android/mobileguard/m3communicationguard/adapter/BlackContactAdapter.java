@@ -23,15 +23,6 @@ public class BlackContactAdapter extends BaseAdapter{
     private BlackNumberDao dao;
     private BlackConactCallBack callBack;
 
-    class ViewHolder{
-        TextView mNameTV;
-        TextView mModeTV;
-        View mContactImgv;
-        View mDeleteView;
-    }
-    public interface BlackConactCallBack{
-        void DataSizeChanged();
-    }
     public void setCallBack(BlackConactCallBack callBack){
         this.callBack = callBack;
     }
@@ -72,7 +63,7 @@ public class BlackContactAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder)view.getTag();
         }
-        holder.mNameTV.setText(contactInfos.get(i).contactName+"("
+        holder.mNameTV.setText(contactInfos.get(i).contactName + "("
                 + contactInfos.get(i).phoneNumber + ")");
         holder.mModeTV.setText(contactInfos.get(i).getModeString(contactInfos.get(i).mode));
         holder.mNameTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
@@ -85,16 +76,27 @@ public class BlackContactAdapter extends BaseAdapter{
                 if (delete){
                     contactInfos.remove(contactInfos.get(i));
                     BlackContactAdapter.this.notifyDataSetChanged();
-                    if (dao.getTotalNumber()==0){
+                    if (dao.getTotalNumber() == 0){
                         callBack.DataSizeChanged();
                     }
                 }else {
-                    Toast.makeText(context,"删除失败！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"删除失败！",0).show();
                 }
             }
         });
         return view;
     }
+    class ViewHolder{
+        TextView mNameTV;
+        TextView mModeTV;
+        View mContactImgv;
+        View mDeleteView;
+    }
+    public interface BlackConactCallBack{
+        void DataSizeChanged();
+    }
+
+
 }
 
 

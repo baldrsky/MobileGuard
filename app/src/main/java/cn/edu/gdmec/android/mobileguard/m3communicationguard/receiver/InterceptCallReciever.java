@@ -78,10 +78,10 @@ public class InterceptCallReciever extends BroadcastReceiver{
     public void deleteCallLog(String incomingNumber,Context context){
         ContentResolver resolver = context.getContentResolver();
         Uri uri = Uri.parse("content://call_log/calls");
-        Cursor cursor = resolver.query(uri,new String[]{"_id"},"number=?",new String[]{incomingNumber},"_id desc limit 1");
+        Cursor cursor = resolver.query(uri,new String[]{ "_id" },"number=?",new String[]{ incomingNumber },"_id desc limit 1");
         if (cursor.moveToNext()){
             String id  = cursor.getString(0);
-            resolver.delete(uri,"_id=?",new String[]{id});
+            resolver.delete(uri,"_id=?",new String[]{ id });
         }
     }
 

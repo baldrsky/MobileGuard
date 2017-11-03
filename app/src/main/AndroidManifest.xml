@@ -71,9 +71,11 @@
         </receiver>
         <activity android:name=".m3communicationguard.AddBlackNumberActivity"/>
         <activity android:name=".m3communicationguard.SecurityPhoneActivity"/>
-        <receiver android:name=".m3communicationguard.receiver.InterceptCallReciever"
-                   android:enabled="true"
-                    android:exported="true">
+
+        <receiver
+            android:name=".m3communicationguard.receiver.InterceptCallReciever"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.PHONE_STATE"/>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>

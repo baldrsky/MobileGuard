@@ -36,7 +36,7 @@ public class BlackNumberDao {
         values.put("name",blackContactInfo.contactName);
         values.put("mode",blackContactInfo.mode);
         long rowid = db.insert("blacknumber",null,values);
-        if (rowid==-1){
+        if (rowid == -1){
             return false;
         }else {
             return true;
@@ -53,9 +53,12 @@ public class BlackNumberDao {
         }
     }
 
-    public List<BlackContactInfo> getPageBlackNumber(int pagenumber,int pagesize){
+    public List<BlackContactInfo> getPageBlackNumber(int pagenumber,
+                                                     int pagesize){
         SQLiteDatabase db = blackNumberOpenHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select number,mode,name from blacknumber limit ? offset ?",new String[]{String.valueOf(pagesize),String.valueOf(pagesize * pagenumber)});
+        Cursor cursor = db.rawQuery("select number,mode,name from blacknumber limit ? offset ?",
+                new String[]{String.valueOf(pagesize),
+                        String.valueOf(pagesize * pagenumber)});
         List<BlackContactInfo> mBlackContactInfos = new ArrayList<BlackContactInfo>();
         while (cursor.moveToNext()){
             BlackContactInfo info = new BlackContactInfo();
@@ -72,7 +75,8 @@ public class BlackNumberDao {
 
     public boolean IsNumberExist(String number){
         SQLiteDatabase db = blackNumberOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("blacknumber",null,"number=?",new String[]{number},null,null,null);
+        Cursor cursor = db.query("blacknumber",null,"number=?",
+                new String[]{number},null,null,null);
         if (cursor.moveToNext()){
             cursor.close();
             db.close();
@@ -86,7 +90,8 @@ public class BlackNumberDao {
     public int getBlackContactMode(String number){
         Log.d("incoming phonenumber",number);
         SQLiteDatabase db = blackNumberOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("blacknumber",new String[]{"mode"},"number=?",new String[]{number},null,null,null);
+        Cursor cursor = db.query("blacknumber",new String[]{"mode"},"number=?",
+                new String[]{number},null,null,null);
         int mode = 0;
         if (cursor.moveToNext()){
             mode = cursor.getInt(cursor.getColumnIndex("mode"));

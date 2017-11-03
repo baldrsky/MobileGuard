@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 
@@ -25,12 +24,13 @@ public class InterceptSmsReciever extends BroadcastReceiver{
         Object[] objs = (Object[]) intent.getExtras().get("puds");
         for (Object obj : objs){
             SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) obj);
-            String sender = smsMessage.getMessageBody();
+            String sender = smsMessage.getOriginatingAddress();
+            String body = smsMessage.getMessageBody();
             if (sender.startsWith("+86")){
                 sender = sender.substring(3,sender.length());
             }
             int mode  = dao.getBlackContactMode(sender);
-            Log.d("-------","onReceive:"+mode);
+            //Log.d("-------","onReceive:"+mode);
             if (mode == 2 || mode == 3){
                 abortBroadcast();
             }
