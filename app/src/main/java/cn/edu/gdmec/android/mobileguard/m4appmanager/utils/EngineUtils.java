@@ -96,7 +96,7 @@ public class EngineUtils {
             AlertDialog.Builder builder =new AlertDialog.Builder(context);
             builder.setTitle(appInfo.appName);
             builder.setMessage("version:"+version+"\n"+
-                    "Install time:"+"\n"+firstInstallTime+"\n"+
+                    /*"Install time:"+"\n"+firstInstallTime+"\n"+*/
                     "Install time:"+"\n"+date+"\n"+
                     "Certificate issuer:"+certMsg+"\n"+
                     "Permission:"+"\n"+s);
