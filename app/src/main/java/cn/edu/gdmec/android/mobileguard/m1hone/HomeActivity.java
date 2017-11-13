@@ -1,5 +1,7 @@
 package cn.edu.gdmec.android.mobileguard.m1hone;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,15 +15,22 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m1hone.adapter.HomeAdapter;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.LostFindActivity;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.InterPasswordDialog;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.SetUpPasswordDialog;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.receiver.MyDeviceAdminReceiver;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
+import cn.edu.gdmec.android.mobileguard.m3communicationguard.SecurityPhoneActivity;
+import cn.edu.gdmec.android.mobileguard.m4appmanager.AppManagerActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private long mExitTime;
 
     private SharedPreferences msharedPreferences;
+    private DevicePolicyManager policyManager;
+    private ComponentName componentName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +52,23 @@ public class HomeActivity extends AppCompatActivity {
                             showSetUpPswDialog();
                         }
                         break;
+                    case 1:
+                        startActivity(SecurityPhoneActivity.class);
+                        break;
+                    case 2:
+                        startActivity(AppManagerActivity.class);
                 }
             }
         });
+        policyManager = (DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
+        componentName = new ComponentName(this, MyDeviceAdminReceiver.class);
+        boolean active = policyManager.isAdminActive(componentName);
+        if (!active){
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,componentName);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,"获取超级管理员权限，用于远程锁屏和清除数据");
+            startActivity(intent);
+        }
     }
     public void startActivity(Class<?>cls){
         Intent intent = new Intent(HomeActivity.this,cls);
@@ -104,14 +127,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void confirm() {
                 if (TextUtils.isEmpty(mInterPswdDialog.getPassword())){
-                    Toast.makeText(HomeActivity.this,"密码不能为空!", 0).show();
+                    Toast.makeText(HomeActivity.this,"密码不能为空!", Toast.LENGTH_LONG).show();
                 }else if (password.equals(MD5Utils.encode(mInterPswdDialog
                      .getPassword()))){
                     mInterPswdDialog.dismiss();
+                    startActivity(LostFindActivity.class);
                     Toast.makeText(HomeActivity.this,"可以进入手机防盗模块",Toast.LENGTH_LONG).show();
                 }else {
                     mInterPswdDialog.dismiss();
-                    Toast.makeText(HomeActivity.this,"密码有误,请重新输入!", 0).show();
+                    Toast.makeText(HomeActivity.this,"密码有误,请重新输入!", Toast.LENGTH_LONG).show();
                 }
             }
 
