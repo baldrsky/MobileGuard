@@ -105,7 +105,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
         isStop = false;
         process = 0;
         mScanAppInfos.clear ();
-        new Thread (  ){
+        new Thread(){
 
             public void run(){
                 Message msg = Message.obtain ();
