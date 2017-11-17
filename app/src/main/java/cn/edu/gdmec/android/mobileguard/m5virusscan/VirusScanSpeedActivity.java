@@ -30,7 +30,7 @@ import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.entity.ScanAppInfo;
 
 /**
- * Created by Swindler on 2017/11/13.
+ * Created by SwinJoy on 2017/11/13.
  */
 
 public class VirusScanSpeedActivity extends AppCompatActivity implements View.OnClickListener{
@@ -123,6 +123,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
                     String md5info =MD5Utils.getFileMd5(apkpath);
                     System.out.println (apkpath);
                     System.out.println (md5info);
+
                     AntiVirusDao antiVirusDao = new AntiVirusDao (
                             VirusScanSpeedActivity.this.getApplicationContext () );
                     String result = antiVirusDao.checkVirus ( md5info );
@@ -157,12 +158,11 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
             };
         }.start ();
     }
-    //病毒查杀
     private void initView() {
         findViewById ( R.id.rl_titlebar ).setBackgroundColor (
                 getResources ().getColor ( R.color.light_blue ) );
         ImageView mLeftImgv = (ImageView) findViewById ( R.id.imgv_leftbtn );
-        ((TextView) findViewById(R.id.tv_title)).setText ( "病毒查杀进度"  );
+        ((TextView) findViewById(R.id.tv_title)).setText ( "病毒查杀进度" );
         mLeftImgv.setOnClickListener ( this );
         mLeftImgv.setImageResource ( R.drawable.back );
         mProcessTV = (TextView) findViewById ( R.id.tv_scanprocess );
@@ -178,7 +178,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
     private void startAnim(){
         if (rani == null){
             rani = new RotateAnimation ( 0, 360, Animation.RELATIVE_TO_SELF,
-                    0.5f, Animation.RELATIVE_TO_SELF,0.5f);
+                    0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         }
         rani.setRepeatCount ( Animation.INFINITE );
         rani.setDuration ( 2000 );

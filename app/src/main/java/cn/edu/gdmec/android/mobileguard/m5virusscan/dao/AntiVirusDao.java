@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
 /**
- * Created by Jack on 2017/11/13.
+ * Created by SwinJoy on 2017/11/13.
  */
 
 public class AntiVirusDao {
@@ -36,7 +36,7 @@ public class AntiVirusDao {
         db.close ();
         return desc;
     }
-    //模块5
+    //模块5老师
 /*    //判断数据库文件是否存在
     public  boolean isDBExit() {
         File file = new File (dbname);
@@ -62,6 +62,29 @@ public class AntiVirusDao {
         }
         cursor.close();
         db.close();
+       /* return versionnumber;
+    }
+    //更新数据库版本号的操作
+    public  void updateDBVersion(int newversion){
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(dbname, null,
+                SQLiteDatabase.OPEN_READWRITE);
+        String versionnumber = "0";
+        ContentValues values = new ContentValues ();
+        values.put("subcnt", newversion);
+        db.update("version", values, null, null);
+        db.close();
+    }
+    //更新病毒数据库的API
+    public  void add(String desc,String md5){
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(dbname, null,
+                SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("md5", md5);
+        values.put("desc", desc);
+        values.put("type", 6);
+        values.put("name", "Android.Hack.i22hkt.a");
+        db.insert("datable", null, values);
+        db.close();*/
         return dbVersion;
     }
 }

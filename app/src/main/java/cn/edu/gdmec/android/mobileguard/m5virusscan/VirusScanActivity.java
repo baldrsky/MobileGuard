@@ -19,11 +19,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m1hone.utils.MyUtils;
 import cn.edu.gdmec.android.mobileguard.m1hone.utils.VersionUpdateUtils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 
 /**
- * Created by Swindler on 2017/11/13.
+ * Created by SwinJoy on 2017/11/13.
  */
 
 public class VirusScanActivity extends AppCompatActivity implements View.OnClickListener{
@@ -41,9 +42,10 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView ( R.layout.activity_virus_scan );
         mSP = getSharedPreferences ( "config", MODE_PRIVATE );
-        //copyDB("antivirus.db");
+
         copyDB("antivirus.db","");
         initView();
+
     }
     @Override
     protected void onResume() {

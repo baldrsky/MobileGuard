@@ -3,6 +3,7 @@ package cn.edu.gdmec.android.mobileguard.m1hone.utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,15 +38,12 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 /**
  * Created by SwinJoy on 2017/9/17.
  */
-
 public class VersionUpdateUtils {
-    private static final int MESSAGE_IO_ERROR = 102;
-    private static final int MESSAGE_JSON_ERROR = 103;
-    private static final int MESSAGE_SHOW_DIALOG = 104;
-    private static final int MESSAGE_ENTERHOME = 105;
-
+    //声明类属性
     private String mVersion;
     private Activity context;
+    //ti-23
+    private ProgressDialog mProgressDialog;
     private VersionEntity versionEntity;
 
     //下一个activtiy的class
@@ -57,20 +55,34 @@ public class VersionUpdateUtils {
     //下载完毕的广播接收者
     private BroadcastReceiver broadcastReceiver;
 
+    //声明常量
+    private static final int MESSAGE_IO_ERROR = 102;
+    private static final int MESSAGE_JSON_ERROR = 103;
+    private static final int MESSAGE_SHOW_DIALOG = 104;
+    private static final int MESSAGE_ENTERHOME = 105;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_IO_ERROR:
-                    Toast.makeText(context, "IO错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "IO错误", Toast.LENGTH_LONG).show();
+                    enterHome();
                     break;
                 case MESSAGE_JSON_ERROR:
-                    Toast.makeText(context, "JSON解析错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "JSON解析错误", Toast.LENGTH_LONG).show();
+                    enterHome();
                     break;
                 case MESSAGE_SHOW_DIALOG:
                     showUpdateDialog(versionEntity);
                     break;
                 case MESSAGE_ENTERHOME:
+                    //Intent intent = new Intent(context, HomeActivity.class);
+                    /*Intent intent = new Intent ( context, VirusScanActivity.class );
+                    context.startActivity(intent);
+
+                    context.finish();*/
+                    //老师模块5
                     if(nextActivty!=null) {
                         Intent intent = new Intent(context, nextActivty);
                         context.startActivity(intent);
@@ -80,8 +92,8 @@ public class VersionUpdateUtils {
             }
         }
     };
-
-
+    //构造方法老师模块5
+    //public VersionUpdateUtils(String mVersion, Activity context) {
     public VersionUpdateUtils(String mVersion, Activity context,DownloadCallback downloadCallback,Class<?> nextActivty) {
         this.mVersion = mVersion;
         this.context = context;
@@ -89,6 +101,12 @@ public class VersionUpdateUtils {
         this.nextActivty = nextActivty;
     }
 
+//    public VersionUpdateUtils(String localDbVersion, VirusScanActivity virusScanActivity) {
+//
+//
+//    }
+
+    //模块5老师，获取服务器版本号
     //public void getCloudVersion() {
     public void getCloudVersion(String url){
         try {
@@ -139,35 +157,42 @@ public class VersionUpdateUtils {
     }
 
     private void showUpdateDialog(final VersionEntity versionEntity) {
+        //创建dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("检测有新版本：" + versionEntity.versioncode);
         builder.setMessage(versionEntity.description);
         builder.setCancelable(false);
-        builder.setIcon(R.mipmap.ic_launcher_round);
-        builder.setPositiveButton("立即升级", new DialogInterface.OnClickListener() {
+        builder.setIcon( R.mipmap.ic_launcher_round);
+        builder.setPositiveButton("立刻升级", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //下载apk
                 downloadNewApk(versionEntity.apkurl);
+                enterHome();
             }
         });
         builder.setNegativeButton("暂不升级", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
+                //模块5
                 enterHome();
             }
         });
         builder.show();
     }
-
+    //发送进入主界面消息
     private void enterHome() {
-        handler.sendEmptyMessage(MESSAGE_ENTERHOME);
+        handler.sendEmptyMessageDelayed(MESSAGE_ENTERHOME,2000);
     }
 
     private void downloadNewApk(String apkurl) {
+        DownloadUtils downloadUtils = new DownloadUtils();
+        //downloadUtils.downloadApk(apkurl, "mobileguard.apk", context);
+        //downloadUtils.downloadApk(apkurl,"antivirus.db",context);
         String filename = "downloadfile";
         String suffixes="avi|mpeg|3gp|mp3|mp4|wav|jpeg|gif|jpg|png|apk|exe|pdf|rar|zip|docx|doc|apk|db";
-        Pattern pat= Pattern.compile("[\\w]+[\\.]("+suffixes+")");//正则判断
+        Pattern pat=Pattern.compile("[\\w]+[\\.]("+suffixes+")");//正则判断
         Matcher mc=pat.matcher(apkurl);//条件匹配
         while(mc.find()){
             filename = mc.group();//截取文件名后缀名
@@ -175,6 +200,7 @@ public class VersionUpdateUtils {
         downapk(apkurl, filename, context);
 
     }
+
     public void downapk(String url,String targetFile,Context context){
         //创建下载任务
         DownloadManager.Request request = new DownloadManager.Request( Uri.parse(url));
@@ -224,4 +250,3 @@ public class VersionUpdateUtils {
         void afterDownload(String filename);
     }
 }
-
