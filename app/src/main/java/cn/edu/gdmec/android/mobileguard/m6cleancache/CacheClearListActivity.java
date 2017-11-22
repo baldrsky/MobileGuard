@@ -86,7 +86,7 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
         ImageView mLeftImgv = (ImageView)findViewById(R.id.imgv_leftbtn);
         mLeftImgv.setOnClickListener(this);
         mLeftImgv.setImageResource(R.drawable.back);
-        ((TextView)findViewById(R.id.tv_title)).setText("扫描缓存");
+        ((TextView)findViewById(R.id.tv_title)).setText("缓存扫描");
         mRecomandTV = (TextView) findViewById(R.id.tv_recommend_clean);
         mCanCleanTV = (TextView)findViewById(R.id.tv_can_clean);
         mCacheLV = (ListView)findViewById(R.id.lv_scancche);
