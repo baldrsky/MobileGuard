@@ -104,6 +104,8 @@
         <activity android:name=".m5virusscan.VirusScanSpeedActivity" />
         <activity android:name=".m6cleancache.CacheClearListActivity" />
         <activity android:name=".m6cleancache.CleanCacheActivity"></activity>
+        <activity android:name=".m8trafficmonitor.OpenratorSetActivity"></activity>
+        <activity android:name=".m8trafficmonitor.TrafficMonitoringActivity"></activity>
     </application>
 
 </manifest>
