@@ -5,11 +5,14 @@ import android.graphics.drawable.Drawable;
 /**
  * Created by SwinJoy on 2017/11/13.
  */
-
 public class ScanAppInfo {
     public String appName;
     public boolean isVirus;
     public String packagename;
     public String description;
     public Drawable appicon;
+
+    //   课堂练习2017.11.28
+    public String virusScanUrl;
+    public String md5info;
 }
