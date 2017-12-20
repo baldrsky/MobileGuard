@@ -71,8 +71,8 @@ public class SplashActivity extends AppCompatActivity {
         }.start();*/
 
         //老师
-        startActivity(new Intent (this, HomeActivity.class));
-        finish();
+        /*startActivity(new Intent (this, HomeActivity.class));
+        finish();*/
     }
     private boolean hasPermission(){
         AppOpsManager appOps = (AppOpsManager)

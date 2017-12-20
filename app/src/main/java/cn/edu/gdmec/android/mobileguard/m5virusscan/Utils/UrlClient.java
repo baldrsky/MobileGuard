@@ -1,9 +1,5 @@
 package cn.edu.gdmec.android.mobileguard.m5virusscan.Utils;
 
-/**
- * Created by Swindler on 2017/12/16.
- */
-
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
